@@ -95,17 +95,17 @@ const links = [
 // ---------------------------------------------------------------------------
 
 const AMOSTRAS = [
-  { hex: C.rust, nome: 'RUST', de: 'o banco do vagão' },
-  { hex: C.ember, nome: 'EMBER', de: 'o reflexo no metal' },
-  { hex: C.amber, nome: 'AMBER', de: 'a parede acesa' },
-  { hex: C.cream, nome: 'CREAM', de: 'a camiseta na luz' },
-  { hex: C.dodger, nome: 'DODGER', de: 'o boné do time' },
-  { hex: C.moss, nome: 'MOSS', de: 'o grafite do fundo' },
+  { hex: C.rust, nome: 'RUST' },
+  { hex: C.ember, nome: 'EMBER' },
+  { hex: C.amber, nome: 'AMBER' },
+  { hex: C.cream, nome: 'CREAM' },
+  { hex: C.dodger, nome: 'DODGER' },
+  { hex: C.moss, nome: 'MOSS' },
 ];
 
 function paletaSvg() {
   const W = 1200;
-  const H = 226;
+  const H = 152;
   const larg = 176;
   const vao = 24;
   const total = AMOSTRAS.length * larg + (AMOSTRAS.length - 1) * vao;
@@ -114,16 +114,15 @@ function paletaSvg() {
   const cartoes = AMOSTRAS.map((a, i) => {
     const x = x0 + i * (larg + vao);
     return `  <g class="carta" style="animation-delay:${(i * 0.09).toFixed(2)}s">
-    <rect x="${x}" y="28" width="${larg}" height="88" rx="12" fill="${a.hex}"/>
-    <rect class="brilho" x="${x}" y="28" width="${larg}" height="88" rx="12" fill="#fff" opacity="0" style="animation-delay:${(i * 0.45).toFixed(2)}s"/>
-    <text x="${x}" y="156" font-family="${MONO}" font-size="13" font-weight="700" letter-spacing="2" fill="${a.hex}">${a.nome}</text>
-    <text x="${x}" y="176" font-family="${MONO}" font-size="12" fill="${C.smoke}">${a.hex.toUpperCase()}</text>
-    <text x="${x}" y="196" font-family="${MONO}" font-size="11.5" fill="${C.smoke}" opacity="0.62">${esc(a.de)}</text>
+    <rect x="${x}" y="8" width="${larg}" height="88" rx="12" fill="${a.hex}"/>
+    <rect class="brilho" x="${x}" y="8" width="${larg}" height="88" rx="12" fill="#fff" opacity="0" style="animation-delay:${(i * 0.45).toFixed(2)}s"/>
+    <text x="${x}" y="118" font-family="${MONO}" font-size="13" font-weight="700" letter-spacing="2" fill="${a.hex}">${a.nome}</text>
+    <text x="${x}" y="138" font-family="${MONO}" font-size="12" fill="${C.smoke}">${a.hex.toUpperCase()}</text>
   </g>`;
   }).join('\n');
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" fill="none" role="img" aria-label="Paleta tirada da ilustração do metrô">
-<title>A paleta, amostrada da ilustração</title>
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" fill="none" role="img" aria-label="Paleta">
+<title>A paleta</title>
 <defs>
 ${grao}
   <style>
@@ -135,7 +134,6 @@ ${grao}
   </style>
 </defs>
 <rect width="${W}" height="${H}" fill="${C.void}"/>
-<text x="${x0}" y="24" font-family="${MONO}" font-size="11" letter-spacing="3.4" fill="${C.smoke}">A PALETA NÃO FOI ESCOLHIDA. FOI AMOSTRADA DO DESENHO.</text>
 ${cartoes}
 <rect width="${W}" height="${H}" filter="url(#g)" opacity="0.05" style="mix-blend-mode:overlay"/>
 </svg>
@@ -233,11 +231,10 @@ fs.writeFileSync('../assets/paleta.svg', paletaSvg());
 fs.writeFileSync('../assets/stack.svg', stackSvg());
 
 const secoes = [
-  ['div-quem.svg', 'quem é o cara'],
-  ['div-trabalho.svg', 'o que eu construí'],
-  ['div-paleta.svg', 'as cores vieram daqui'],
-  ['div-stack.svg', 'as ferramentas'],
-  ['div-numeros.svg', 'os números'],
+  ['div-trabalho.svg', 'o trabalho'],
+  ['div-paleta.svg', 'a paleta'],
+  ['div-stack.svg', 'ferramentas'],
+  ['div-numeros.svg', 'números'],
   ['div-fala.svg', 'me chama'],
 ];
 for (const [arq, titulo] of secoes) {

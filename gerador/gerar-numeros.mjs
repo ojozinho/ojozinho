@@ -35,9 +35,6 @@ query($login: String!) {
       totalCount
       nodes {
         stargazerCount
-        languages(first: 8, orderBy: {field: SIZE, direction: DESC}) {
-          edges { size node { name color } }
-        }
       }
     }
   }
@@ -58,42 +55,33 @@ async function buscar() {
   return j.data.user;
 }
 
-/** Agrega bytes por linguagem em todos os repositorios e devolve as maiores em porcentagem. */
-function linguagens(repos) {
-  const soma = new Map();
-  for (const repo of repos) {
-    for (const e of repo.languages.edges) {
-      const atual = soma.get(e.node.name) ?? { bytes: 0, cor: e.node.color };
-      atual.bytes += e.size;
-      soma.set(e.node.name, atual);
-    }
-  }
-  const total = [...soma.values()].reduce((s, v) => s + v.bytes, 0) || 1;
-  return [...soma.entries()]
-    .sort((a, b) => b[1].bytes - a[1].bytes)
-    .slice(0, 6)
-    .map(([nome, v]) => ({ nome, pct: (v.bytes / total) * 100, cor: v.cor || C.smoke }));
-}
-
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const compacto = (n) => (n >= 1000 ? (n / 1000).toFixed(1).replace('.0', '') + 'k' : String(n));
 
 function desenhar(u) {
   const cc = u.contributionsCollection;
   const estrelas = u.repositories.nodes.reduce((s, r) => s + r.stargazerCount, 0);
-  const langs = linguagens(u.repositories.nodes);
 
-  const cartoes = [
-    { valor: cc.contributionCalendar.totalContributions + cc.restrictedContributionsCount, rotulo: 'contribuições no ano', cor: C.ember },
-    { valor: cc.totalCommitContributions, rotulo: 'commits', cor: C.amber },
+  /*
+    Só entra o que tem número.
+
+    Cartão zerado não informa nada e ainda ocupa o mesmo espaço de um cheio. Os dois primeiros
+    ficam sempre, porque são o que a página é; o resto aparece quando passar de zero e some de
+    novo se voltar. Assim o cartão se ajusta sozinho conforme a conta cresce, sem ninguém ter que
+    vir aqui editar lista.
+  */
+  const todos = [
+    { valor: cc.contributionCalendar.totalContributions + cc.restrictedContributionsCount, rotulo: 'contribuições no ano', cor: C.ember, fixo: true },
+    { valor: cc.totalCommitContributions, rotulo: 'commits', cor: C.amber, fixo: true },
     { valor: u.repositories.totalCount, rotulo: 'repositórios', cor: C.cream },
     { valor: cc.totalPullRequestContributions, rotulo: 'pull requests', cor: C.sky },
     { valor: estrelas, rotulo: 'estrelas', cor: C.rust },
     { valor: u.followers.totalCount, rotulo: 'seguidores', cor: C.moss },
   ];
+  const cartoes = todos.filter((c) => c.fixo || c.valor > 0);
 
   const W = 1200;
-  const H = 300;
+  const H = 176;
   const larg = 176;
   const vao = 24;
   const total = cartoes.length * larg + (cartoes.length - 1) * vao;
@@ -103,31 +91,10 @@ function desenhar(u) {
     .map((c, i) => {
       const x = x0 + i * (larg + vao);
       return `  <g class="carta" style="animation-delay:${(i * 0.08).toFixed(2)}s">
-    <rect x="${x}" y="44" width="${larg}" height="92" rx="14" fill="${c.cor}" fill-opacity="0.10" stroke="${c.cor}" stroke-opacity="0.28"/>
-    <text x="${x + 18}" y="98" font-family="${MONO}" font-size="34" font-weight="700" fill="${c.cor}">${compacto(c.valor)}</text>
-    <text x="${x + 18}" y="120" font-family="${MONO}" font-size="11" fill="${C.smoke}">${esc(c.rotulo)}</text>
+    <rect x="${x}" y="40" width="${larg}" height="92" rx="14" fill="${c.cor}" fill-opacity="0.10" stroke="${c.cor}" stroke-opacity="0.28"/>
+    <text x="${x + 18}" y="94" font-family="${MONO}" font-size="34" font-weight="700" fill="${c.cor}">${compacto(c.valor)}</text>
+    <text x="${x + 18}" y="116" font-family="${MONO}" font-size="11" fill="${C.smoke}">${esc(c.rotulo)}</text>
   </g>`;
-    })
-    .join('\n');
-
-  // A barra de linguagens: cada faixa cresce da esquerda para a direita, uma depois da outra.
-  let cursor = x0;
-  const barraLarg = total;
-  const faixas = langs
-    .map((l, i) => {
-      const w = Math.max(2, Math.round((l.pct / 100) * barraLarg));
-      const x = cursor;
-      cursor += w;
-      return `    <rect x="${x}" y="182" width="${w}" height="14" fill="${l.cor}" class="faixa" style="animation-delay:${(0.5 + i * 0.1).toFixed(2)}s"/>`;
-    })
-    .join('\n');
-
-  const legendas = langs
-    .map((l, i) => {
-      const x = x0 + (i % 3) * Math.round(total / 3);
-      const y = 232 + Math.floor(i / 3) * 26;
-      return `    <circle cx="${x + 5}" cy="${y - 4}" r="5" fill="${l.cor}"/>
-    <text x="${x + 18}" y="${y}" font-family="${MONO}" font-size="12.5" fill="${C.cream}" opacity="0.88">${esc(l.nome)} <tspan fill="${C.smoke}">${l.pct.toFixed(1)}%</tspan></text>`;
     })
     .join('\n');
 
@@ -140,22 +107,13 @@ function desenhar(u) {
   </filter>
   <style>
     @keyframes subir { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes abrir { from { transform: scaleX(0); } to { transform: scaleX(1); } }
     .carta { animation: subir .7s cubic-bezier(.2,.8,.2,1) both; }
-    .faixa { transform-origin: left center; transform-box: fill-box; animation: abrir .8s cubic-bezier(.2,.8,.2,1) both; }
-    @media (prefers-reduced-motion: reduce) { .carta, .faixa { animation: none; } }
+    @media (prefers-reduced-motion: reduce) { .carta { animation: none; } }
   </style>
 </defs>
 <rect width="${W}" height="${H}" fill="${C.void}"/>
 <text x="${x0}" y="24" font-family="${MONO}" font-size="11" letter-spacing="3.4" fill="${C.smoke}">DIRETO DA API DO GITHUB. ATUALIZA SOZINHO A CADA SEIS HORAS.</text>
 ${blocos}
-<text x="${x0}" y="172" font-family="${MONO}" font-size="11" letter-spacing="3.4" fill="${C.smoke}">NO QUE EU ESCREVO</text>
-<g>
-${faixas}
-</g>
-<g>
-${legendas}
-</g>
 <rect width="${W}" height="${H}" filter="url(#g)" opacity="0.05" style="mix-blend-mode:overlay"/>
 </svg>
 `;
