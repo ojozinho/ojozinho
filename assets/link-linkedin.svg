@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="300" height="64" fill="none" role="img" aria-label="joão vitor garcino">
+<title>joão vitor garcino</title>
+<defs>
+  <linearGradient id="f" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#63B3F5" stop-opacity="0.20"/>
+    <stop offset="1" stop-color="#63B3F5" stop-opacity="0.04"/>
+  </linearGradient>
+  <linearGradient id="v" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#63B3F5" stop-opacity="0"/>
+    <stop offset="0.5" stop-color="#63B3F5" stop-opacity="0.5"/>
+    <stop offset="1" stop-color="#63B3F5" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="g" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <clipPath id="c"><rect x="1" y="1" width="298" height="62" rx="14"/></clipPath>
+  <style>
+    @keyframes correr { to { stroke-dashoffset: -704; } }
+    @keyframes varrer { from { transform: translateX(-300px); } to { transform: translateX(300px); } }
+    @keyframes respirar { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+    .fio  { stroke-dasharray: 90 614; animation: correr 5.5s linear infinite; }
+    .luz  { animation: varrer 5.5s linear infinite; }
+    .seta { animation: respirar 2.4s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .fio, .luz, .seta { animation: none; } }
+  </style>
+</defs>
+<rect x="1" y="1" width="298" height="62" rx="14" fill="url(#f)" stroke="#63B3F5" stroke-opacity="0.32"/>
+<rect x="1" y="1" width="298" height="62" rx="14" class="fio" stroke="#63B3F5" stroke-width="2"/>
+<g clip-path="url(#c)"><rect class="luz" x="0" y="0" width="300" height="64" fill="url(#v)"/></g>
+<g transform="translate(24 21)" fill="#63B3F5"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM.35 7.4h4.3V22H.35V7.4ZM8 7.4h4.12v2h.06c.57-1.08 1.97-2.22 4.06-2.22 4.34 0 5.14 2.86 5.14 6.58V22h-4.3v-6.36c0-1.52-.03-3.47-2.11-3.47-2.12 0-2.44 1.65-2.44 3.36V22H8V7.4Z"/></g>
+<text x="62" y="29" font-family="ui-monospace,'SF Mono','Cascadia Mono','Roboto Mono',Menlo,Consolas,monospace" font-size="10.5" letter-spacing="2.6" fill="#63B3F5" opacity="0.75">LINKEDIN</text>
+<text x="62" y="47" font-family="ui-monospace,'SF Mono','Cascadia Mono','Roboto Mono',Menlo,Consolas,monospace" font-size="14.5" font-weight="700" fill="#F3E2C7">joão vitor garcino</text>
+<g class="seta" transform="translate(266 26)" stroke="#63B3F5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+  <path d="M0 6h11M6 1l5 5-5 5"/>
+</g>
+<rect width="300" height="64" rx="14" filter="url(#g)" opacity="0.05" style="mix-blend-mode:overlay"/>
+</svg>

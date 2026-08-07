@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" fill="none" role="img" aria-label="JOZINHO — web designer, UI/UX, São Paulo">
+<title>JOZINHO — web designer · UI/UX</title>
+<defs>
+  <linearGradient id="ceu" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#010409"/>
+    <stop offset="0.55" stop-color="#0d1117"/>
+    <stop offset="1" stop-color="#14100c"/>
+  </linearGradient>
+
+  <radialGradient id="brilho" cx="0.5" cy="0.62" r="0.72">
+    <stop offset="0" stop-color="#E2571E" stop-opacity="0.26"/>
+    <stop offset="0.5" stop-color="#E2571E" stop-opacity="0.07"/>
+    <stop offset="1" stop-color="#E2571E" stop-opacity="0"/>
+  </radialGradient>
+
+  <linearGradient id="tinta" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#F2A65A"/>
+    <stop offset="0.32" stop-color="#FF8A3D"/>
+    <stop offset="0.62" stop-color="#F3E2C7"/>
+    <stop offset="1" stop-color="#F2A65A"/>
+    <animate attributeName="x1" values="-1;0;-1" dur="9s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="0;1;0" dur="9s" repeatCount="indefinite"/>
+  </linearGradient>
+
+  <linearGradient id="lampejo" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+    <stop offset="0.45" stop-color="#fff" stop-opacity="0.85"/>
+    <stop offset="0.55" stop-color="#fff" stop-opacity="0.85"/>
+    <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+  </linearGradient>
+
+  <linearGradient id="feixe" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#F2A65A" stop-opacity="0"/>
+    <stop offset="0.35" stop-color="#F2A65A" stop-opacity="1"/>
+    <stop offset="0.7" stop-color="#FF8A3D" stop-opacity="1"/>
+    <stop offset="1" stop-color="#FF8A3D" stop-opacity="0"/>
+  </linearGradient>
+
+  <filter id="graos" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.86" numOctaves="3" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+
+  <filter id="halo" x="-40%" y="-40%" width="180%" height="180%">
+    <feGaussianBlur stdDeviation="9" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+
+  <clipPath id="recorteNome">
+    <path d="M4.58 1.46L3.12-29.33Q5.41-28.91 7.80-28.70Q10.19-28.50 11.65-28.50Q19.55-28.50 23.82-30.68Q28.08-32.86 29.85-37.65Q31.62-42.43 31.62-50.54L31.62-137.28L65.31-137.28L65.31-50.34Q65.31-32.86 60.11-21.22Q54.91-9.57 44.30-3.64Q33.70 2.29 17.26 2.29Q15.18 2.29 12.27 2.08Q9.36 1.87 4.58 1.46 M148.34 2.91Q133.36 2.91 121.30-1.66Q109.23-6.24 100.60-15.18Q91.97-24.13 87.39-37.34Q82.82-50.54 82.82-68.02Q82.82-92.56 91.45-108.47Q100.08-124.38 115.26-132.29Q130.45-140.19 149.58-140.19Q164.35-140.19 176.42-135.62Q188.48-131.04 197.11-122.10Q205.74-113.15 210.42-99.74Q215.10-86.32 215.10-68.85Q215.10-50.75 210.22-37.34Q205.33-23.92 196.49-14.98Q187.65-6.03 175.38-1.56Q163.10 2.91 148.34 2.91M149.38-23.30Q159.57-23.30 166.54-28.39Q173.50-33.49 177.14-43.16Q180.78-52.83 180.78-66.77Q180.78-81.54 177.04-91.83Q173.30-102.13 166.12-107.43Q158.94-112.74 148.54-112.74Q138.56-112.74 131.59-107.64Q124.62-102.54 120.88-92.66Q117.14-82.78 117.14-68.43Q117.14-57.62 119.32-49.19Q121.50-40.77 125.46-35.05Q129.41-29.33 135.54-26.31Q141.68-23.30 149.38-23.30 M331.41 0L225.12 0L225.12-31.62L292.10-106.91L292.10-109.41L227.20-109.41L227.20-137.28L328.70-137.28L328.70-102.96L264.02-30.16L264.02-27.87L331.41-27.87 M380.53 0L346.42 0L346.42-137.28L380.53-137.28 M436.10 0L403.44 0L403.44-137.28L446.91-137.28L505.78-45.14L508.27-45.14L506.19-137.28L538.85-137.28L538.85 0L499.54 0L436.51-97.34L434.22-97.34 M684.69 0L651.20 0L651.20-137.28L684.69-137.28L684.69 0M595.25 0L561.76 0L561.76-137.28L595.25-137.28L595.25 0M664.72-55.74L582.14-55.74L582.14-82.78L664.72-82.78 M768.13 2.91Q753.15 2.91 741.09-1.66Q729.02-6.24 720.39-15.18Q711.76-24.13 707.18-37.34Q702.61-50.54 702.61-68.02Q702.61-92.56 711.24-108.47Q719.87-124.38 735.06-132.29Q750.24-140.19 769.38-140.19Q784.14-140.19 796.21-135.62Q808.27-131.04 816.90-122.10Q825.54-113.15 830.22-99.74Q834.90-86.32 834.90-68.85Q834.90-50.75 830.01-37.34Q825.12-23.92 816.28-14.98Q807.44-6.03 795.17-1.56Q782.90 2.91 768.13 2.91M769.17-23.30Q779.36-23.30 786.33-28.39Q793.30-33.49 796.94-43.16Q800.58-52.83 800.58-66.77Q800.58-81.54 796.83-91.83Q793.09-102.13 785.91-107.43Q778.74-112.74 768.34-112.74Q758.35-112.74 751.38-107.64Q744.42-102.54 740.67-92.66Q736.93-82.78 736.93-68.43Q736.93-57.62 739.11-49.19Q741.30-40.77 745.25-35.05Q749.20-29.33 755.34-26.31Q761.47-23.30 769.17-23.30" transform="translate(178 268)"/>
+  </clipPath>
+
+  <clipPath id="revelaLinha">
+    <rect id="cortina" x="182" y="0" width="0" height="460"/>
+  </clipPath>
+
+  <style>
+    @keyframes correr { from { transform: translateX(0); } to { transform: translateX(1700px); } }
+    @keyframes varrer { from { transform: translateX(-420px); } to { transform: translateX(1320px); } }
+    @keyframes pulsar { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+    @keyframes piscar { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+    @keyframes surgir { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes esticar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes digitar { from { width: 0; } to { width: 410px; } }
+    @keyframes tremer { 0%,100% { opacity: 0.055; } 50% { opacity: 0.085; } }
+
+    .barra   { animation: correr linear infinite; }
+    .lampejo { animation: varrer 6s cubic-bezier(.6,0,.35,1) infinite; }
+    .kicker  { animation: surgir .9s ease-out both; }
+    .regua   { transform-origin: left center; animation: esticar 1.4s cubic-bezier(.2,.8,.2,1) .35s both; }
+    .cursor  { animation: piscar 1.05s steps(1) infinite; }
+    .ponto   { animation: pulsar 2.6s ease-in-out infinite; }
+    .grao    { animation: tremer 4s ease-in-out infinite; }
+    #cortina { animation: digitar 2.6s steps(36) .7s both; }
+
+    /* Quem pede menos movimento recebe menos movimento. Nao e acessibilidade decorativa: existe
+       gente que sente enjoo com coisa deslizando na tela. */
+    @media (prefers-reduced-motion: reduce) {
+      .barra, .lampejo, .kicker, .regua, .cursor, .ponto, .grao, #cortina { animation: none; }
+      #cortina { width: 410px; }
+    }
+  </style>
+</defs>
+
+<rect width="1200" height="460" fill="url(#ceu)"/>
+<rect width="1200" height="460" fill="url(#brilho)"/>
+
+<!-- A luz das estacoes passando pela janela do vagao. -->
+<g opacity="0.9">
+  <rect class="barra" x="-180" y="0" width="90" height="460" fill="url(#feixe)" opacity="0.16" style="animation-duration:7.5s;animation-delay:-0s"/>
+  <rect class="barra" x="-320" y="0" width="34" height="460" fill="url(#feixe)" opacity="0.1" style="animation-duration:9s;animation-delay:-1.1s"/>
+  <rect class="barra" x="-60" y="0" width="150" height="460" fill="url(#feixe)" opacity="0.07" style="animation-duration:11s;animation-delay:-2.4s"/>
+  <rect class="barra" x="-420" y="0" width="60" height="460" fill="url(#feixe)" opacity="0.13" style="animation-duration:8.2s;animation-delay:-3.7s"/>
+  <rect class="barra" x="-240" y="0" width="22" height="460" fill="url(#feixe)" opacity="0.18" style="animation-duration:6.4s;animation-delay:-5s"/>
+</g>
+
+<!-- Trilhos horizontais, o piso do vagao. -->
+<g stroke="#F3E2C7" stroke-opacity="0.06">
+  <line x1="0" y1="294" x2="1200" y2="294"/>
+  <line x1="0" y1="302" x2="1200" y2="302"/>
+</g>
+
+<g class="kicker">
+  <circle class="ponto" cx="182" cy="96" r="5" fill="#7BA36A"/>
+  <text x="196" y="101" font-family="ui-monospace,'SF Mono','Cascadia Mono','Roboto Mono',Menlo,Consolas,monospace" font-size="15" letter-spacing="4.2" fill="#8B949E">WEB DESIGNER  ·  UI / UX  ·  SÃO PAULO, BR</text>
+</g>
+
+<!-- O nome, em contorno. O gradiente anda por dentro e o lampejo corre por cima, recortado pela
+     propria forma das letras. -->
+<g filter="url(#halo)">
+  <path d="M4.58 1.46L3.12-29.33Q5.41-28.91 7.80-28.70Q10.19-28.50 11.65-28.50Q19.55-28.50 23.82-30.68Q28.08-32.86 29.85-37.65Q31.62-42.43 31.62-50.54L31.62-137.28L65.31-137.28L65.31-50.34Q65.31-32.86 60.11-21.22Q54.91-9.57 44.30-3.64Q33.70 2.29 17.26 2.29Q15.18 2.29 12.27 2.08Q9.36 1.87 4.58 1.46 M148.34 2.91Q133.36 2.91 121.30-1.66Q109.23-6.24 100.60-15.18Q91.97-24.13 87.39-37.34Q82.82-50.54 82.82-68.02Q82.82-92.56 91.45-108.47Q100.08-124.38 115.26-132.29Q130.45-140.19 149.58-140.19Q164.35-140.19 176.42-135.62Q188.48-131.04 197.11-122.10Q205.74-113.15 210.42-99.74Q215.10-86.32 215.10-68.85Q215.10-50.75 210.22-37.34Q205.33-23.92 196.49-14.98Q187.65-6.03 175.38-1.56Q163.10 2.91 148.34 2.91M149.38-23.30Q159.57-23.30 166.54-28.39Q173.50-33.49 177.14-43.16Q180.78-52.83 180.78-66.77Q180.78-81.54 177.04-91.83Q173.30-102.13 166.12-107.43Q158.94-112.74 148.54-112.74Q138.56-112.74 131.59-107.64Q124.62-102.54 120.88-92.66Q117.14-82.78 117.14-68.43Q117.14-57.62 119.32-49.19Q121.50-40.77 125.46-35.05Q129.41-29.33 135.54-26.31Q141.68-23.30 149.38-23.30 M331.41 0L225.12 0L225.12-31.62L292.10-106.91L292.10-109.41L227.20-109.41L227.20-137.28L328.70-137.28L328.70-102.96L264.02-30.16L264.02-27.87L331.41-27.87 M380.53 0L346.42 0L346.42-137.28L380.53-137.28 M436.10 0L403.44 0L403.44-137.28L446.91-137.28L505.78-45.14L508.27-45.14L506.19-137.28L538.85-137.28L538.85 0L499.54 0L436.51-97.34L434.22-97.34 M684.69 0L651.20 0L651.20-137.28L684.69-137.28L684.69 0M595.25 0L561.76 0L561.76-137.28L595.25-137.28L595.25 0M664.72-55.74L582.14-55.74L582.14-82.78L664.72-82.78 M768.13 2.91Q753.15 2.91 741.09-1.66Q729.02-6.24 720.39-15.18Q711.76-24.13 707.18-37.34Q702.61-50.54 702.61-68.02Q702.61-92.56 711.24-108.47Q719.87-124.38 735.06-132.29Q750.24-140.19 769.38-140.19Q784.14-140.19 796.21-135.62Q808.27-131.04 816.90-122.10Q825.54-113.15 830.22-99.74Q834.90-86.32 834.90-68.85Q834.90-50.75 830.01-37.34Q825.12-23.92 816.28-14.98Q807.44-6.03 795.17-1.56Q782.90 2.91 768.13 2.91M769.17-23.30Q779.36-23.30 786.33-28.39Q793.30-33.49 796.94-43.16Q800.58-52.83 800.58-66.77Q800.58-81.54 796.83-91.83Q793.09-102.13 785.91-107.43Q778.74-112.74 768.34-112.74Q758.35-112.74 751.38-107.64Q744.42-102.54 740.67-92.66Q736.93-82.78 736.93-68.43Q736.93-57.62 739.11-49.19Q741.30-40.77 745.25-35.05Q749.20-29.33 755.34-26.31Q761.47-23.30 769.17-23.30" transform="translate(178 268)" fill="url(#tinta)"/>
+</g>
+<g clip-path="url(#recorteNome)">
+  <rect class="lampejo" x="0" y="0" width="420" height="460" fill="url(#lampejo)" opacity="0.55"/>
+</g>
+
+<rect class="regua" x="178" y="298" width="844" height="3" fill="#E2571E"/>
+
+<g clip-path="url(#revelaLinha)">
+  <text x="182" y="356" font-family="ui-monospace,'SF Mono','Cascadia Mono','Roboto Mono',Menlo,Consolas,monospace" font-size="19" fill="#F3E2C7" opacity="0.92">design que resolve, não que enfeita.</text>
+</g>
+<rect class="cursor" x="596" y="340" width="11" height="21" fill="#FF8A3D"/>
+
+<rect class="grao" width="1200" height="460" filter="url(#graos)" opacity="0.07" style="mix-blend-mode:overlay"/>
+</svg>

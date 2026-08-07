@@ -1,0 +1,20 @@
+import { chromium } from 'playwright';
+import fs from 'node:fs';
+const ENTRADA = 'C:/Users/joaog/OneDrive/Imagens/github profile/Imagem site.png';
+const b64 = fs.readFileSync(ENTRADA).toString('base64');
+const browser = await chromium.launch();
+const page = await browser.newPage();
+const saida = await page.evaluate(async (b64) => {
+  const img = new Image(); img.src = 'data:image/png;base64,' + b64; await img.decode();
+  const largura = 1600;
+  const c = document.createElement('canvas');
+  c.width = largura; c.height = Math.round(largura * img.height / img.width);
+  const ctx = c.getContext('2d');
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(img, 0, 0, c.width, c.height);
+  return { url: c.toDataURL('image/webp', 0.86), w: c.width, h: c.height };
+}, b64);
+const buf = Buffer.from(saida.url.split(',')[1], 'base64');
+fs.writeFileSync('../assets/vagao.webp', buf);
+console.log(`vagao.webp ${saida.w}x${saida.h} ${(buf.length/1024).toFixed(0)} KB (era ${(fs.statSync(ENTRADA).size/1024).toFixed(0)} KB)`);
+await browser.close();

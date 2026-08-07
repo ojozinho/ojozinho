@@ -1,0 +1,17 @@
+{
+  "name": "gerador-do-perfil",
+  "private": true,
+  "type": "module",
+  "description": "Desenha os SVG do perfil do JOZINHO. Ver LEIA-ME.md.",
+  "scripts": {
+    "hero": "node gerar-hero.mjs",
+    "pecas": "node gerar-pecas.mjs",
+    "provar": "node provar.mjs"
+  },
+  "dependencies": {
+    "opentype.js": "^1.3.4"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.0"
+  }
+}
