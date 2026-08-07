@@ -1,18 +1,21 @@
-name: cobrinha
+name: perfil vivo
 
-# A cobra que come o grafico de contribuicoes.
+# O que precisa ser redesenhado de tempos em tempos.
 #
-# Ela nao pode ser gerada na hora em que alguem abre o perfil: o desenho depende do historico de
-# contribuicoes, que so a API do GitHub sabe. Entao o trabalho roda aqui, de tempos em tempos,
-# gera o SVG e empurra para um galho separado chamado `output`. O README aponta para o arquivo
-# nesse galho.
+# Duas coisas neste perfil dependem de dado que muda: a cobra que come o gráfico de contribuições
+# e o cartão de números. As duas são desenhadas aqui, numa Action, e empurradas para um galho
+# separado chamado `output`. O README aponta para os arquivos nesse galho.
 #
-# O galho e separado de proposito. Assim o historico do galho principal nao enche de commit
-# automatico de imagem gerada, e dar `git log` continua servindo para alguma coisa.
+# O galho é separado de propósito. Assim o histórico do galho principal não enche de commit
+# automático de imagem gerada, e dar `git log` continua servindo para alguma coisa.
+#
+# O cartão de números já foi um serviço de terceiro, o github-readme-stats. Ele saiu do ar
+# ("503 DEPLOYMENT_PAUSED") e teria deixado dois retângulos quebrados no meio do perfil, sem
+# aviso nenhum. Agora os números vêm da API do próprio GitHub e o desenho é nosso.
 
 on:
   schedule:
-    # A cada seis horas. O grafico muda devagar, e mais frequente que isso so gastaria minuto de
+    # A cada seis horas. O gráfico muda devagar, e mais frequente que isso só gastaria minuto de
     # Action para redesenhar a mesma coisa.
     - cron: '0 */6 * * *'
   workflow_dispatch:
@@ -21,21 +24,35 @@ on:
       - main
 
 jobs:
-  gerar:
+  desenhar:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v4
+
       - name: Desenhar a cobra
         uses: Platane/snk@v3
         id: cobra
         with:
           github_user_name: ${{ github.repository_owner }}
-          # As cores acompanham a paleta do perfil, tirada da ilustracao: o fundo e o mesmo
-          # #0d1117 do GitHub no modo escuro, e os pontos vao do rust ao cream conforme o dia
-          # teve mais ou menos contribuicao.
+          # As cores acompanham a paleta do perfil, tirada da ilustração: o fundo é o mesmo
+          # #0d1117 do GitHub no modo escuro, e os pontos vão do rust ao amber conforme o dia
+          # teve mais ou menos contribuição.
           outputs: |
             dist/cobra-escura.svg?palette=github-dark&color_snake=#E2571E&color_dots=#161b22,#5c2a10,#a13d15,#E2571E,#F2A65A
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Desenhar o cartão de números
+        working-directory: gerador
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USUARIO: ${{ github.repository_owner }}
+          SAIDA: ../dist/numeros.svg
+        run: node gerar-numeros.mjs
 
       - name: Publicar no galho output
         uses: crazy-max/ghaction-github-pages@v4

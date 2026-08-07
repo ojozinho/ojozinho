@@ -102,19 +102,18 @@ o GitHub usa no modo escuro.
 
 <img src="./assets/div-numeros.svg" width="100%" alt="os números">
 
+<img src="https://raw.githubusercontent.com/ojozinho/ojozinho/output/numeros.svg" width="100%" alt="Números do GitHub: contribuições, commits, repositórios e linguagens">
+
 <div align="center">
 
-<img height="165" src="https://github-readme-stats.vercel.app/api?username=ojozinho&show_icons=true&hide_border=true&bg_color=0d1117&title_color=FF8A3D&icon_color=E2571E&text_color=F3E2C7&ring_color=E2571E&include_all_commits=true&custom_title=o%20que%20eu%20venho%20fazendo" alt="Estatísticas do GitHub">
-<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ojozinho&layout=compact&hide_border=true&bg_color=0d1117&title_color=FF8A3D&text_color=F3E2C7&langs_count=8&custom_title=no%20que%20eu%20escrevo" alt="Linguagens mais usadas">
-
-<br><br>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ojozinho/ojozinho/output/cobra-escura.svg">
-  <img alt="A cobrinha comendo o gráfico de contribuições" src="https://raw.githubusercontent.com/ojozinho/ojozinho/output/cobra-escura.svg">
-</picture>
+<img src="https://raw.githubusercontent.com/ojozinho/ojozinho/output/cobra-escura.svg" width="100%" alt="A cobrinha comendo o gráfico de contribuições">
 
 </div>
+
+<sub>Esses dois se redesenham sozinhos a cada seis horas, numa Action. O cartão de números era um
+serviço de terceiro até eu conferir e receber `503 DEPLOYMENT_PAUSED` — ele tinha saído do ar de
+vez, e teria deixado dois retângulos quebrados aqui sem avisar ninguém. Agora os números vêm da
+API do próprio GitHub e o desenho é meu.</sub>
 
 <br>
 
