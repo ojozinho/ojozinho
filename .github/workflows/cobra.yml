@@ -31,21 +31,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Desenhar a cobra
-        uses: Platane/snk@v3
-        id: cobra
-        with:
-          github_user_name: ${{ github.repository_owner }}
-          # As cores acompanham a paleta do perfil, tirada da ilustração: o fundo é o mesmo
-          # #0d1117 do GitHub no modo escuro, e os pontos vão do rust ao amber conforme o dia
-          # teve mais ou menos contribuição.
-          outputs: |
-            dist/cobra-escura.svg?palette=github-dark&color_snake=#E2571E&color_dots=#161b22,#5c2a10,#a13d15,#E2571E,#F2A65A
-
       - uses: actions/setup-node@v4
         with:
           node-version: 22
 
+      # Os números vêm ANTES da cobra, e a ordem não é gosto.
+      #
+      # A action da cobra roda dentro de um contêiner, como root, e cria a pasta `dist` com esse
+      # dono. O passo seguinte roda como o usuário comum do runner e leva `EACCES` ao tentar
+      # escrever ali dentro. Gerando os números primeiro, a pasta nasce do usuário certo e o root
+      # consegue escrever nela depois — a ordem inversa não funciona.
       - name: Desenhar o cartão de números
         working-directory: gerador
         env:
@@ -53,6 +48,17 @@ jobs:
           USUARIO: ${{ github.repository_owner }}
           SAIDA: ../dist/numeros.svg
         run: node gerar-numeros.mjs
+
+      - name: Desenhar a cobra
+        uses: Platane/snk@v3
+        id: cobra
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          # As cores acompanham a paleta do perfil: o fundo é o mesmo #0d1117 do GitHub no modo
+          # escuro, e os pontos vão do rust ao amber conforme o dia teve mais ou menos
+          # contribuição.
+          outputs: |
+            dist/cobra-escura.svg?palette=github-dark&color_snake=#E2571E&color_dots=#161b22,#5c2a10,#a13d15,#E2571E,#F2A65A
 
       - name: Publicar no galho output
         uses: crazy-max/ghaction-github-pages@v4
