@@ -61,7 +61,7 @@ ${grao}
 <g clip-path="url(#c)"><rect class="luz" x="0" y="0" width="${largura}" height="${H}" fill="url(#v)"/></g>
 <g transform="translate(24 ${H / 2 - 11})" fill="${cor}">${glifo}</g>
 <text x="62" y="${H / 2 - 3}" font-family="${MONO}" font-size="10.5" letter-spacing="2.6" fill="${cor}" opacity="0.75">${esc(nome)}</text>
-<text x="62" y="${H / 2 + 15}" font-family="${MONO}" font-size="14.5" font-weight="700" fill="${C.cream}">${esc(rotulo)}</text>
+<text x="62" y="${H / 2 + 15}" font-family="${MONO}" font-size="14.5" font-weight="700" fill="${C.text}">${esc(rotulo)}</text>
 <g class="seta" transform="translate(${largura - 34} ${H / 2 - 6})" stroke="${cor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
   <path d="M0 6h11M6 1l5 5-5 5"/>
 </g>
@@ -84,61 +84,10 @@ const GLIFO_EMAIL =
   '<path d="M2.4 2h17.2A2.4 2.4 0 0 1 22 4.4v13.2a2.4 2.4 0 0 1-2.4 2.4H2.4A2.4 2.4 0 0 1 0 17.6V4.4A2.4 2.4 0 0 1 2.4 2Zm.6 2.4 8 5.5 8-5.5H3Zm16.8 1.9-7.7 5.3a2.4 2.4 0 0 1-2.7 0L2.2 6.3v11.4h17.6V6.3Z"/>';
 
 const links = [
-  { arq: 'link-instagram.svg', nome: 'INSTAGRAM', rotulo: '@jozinho', cor: C.ember, glifo: GLIFO_INSTA },
-  { arq: 'link-linkedin.svg', nome: 'LINKEDIN', rotulo: 'joão vitor garcino', cor: C.sky, glifo: GLIFO_LINKEDIN },
-  { arq: 'link-site.svg', nome: 'TRABALHO', rotulo: 'partypay.com.br', cor: C.amber, glifo: GLIFO_GLOBO },
-  { arq: 'link-email.svg', nome: 'CONTATO', rotulo: 'me manda um oi', cor: C.moss, glifo: GLIFO_EMAIL },
+  { arq: 'link-instagram.svg', nome: 'INSTAGRAM', rotulo: '@jozinho', cor: C.pink, glifo: GLIFO_INSTA },
+  { arq: 'link-linkedin.svg', nome: 'LINKEDIN', rotulo: 'joão victor garcino', cor: C.blue, glifo: GLIFO_LINKEDIN },
+  { arq: 'link-email.svg', nome: 'E-MAIL', rotulo: 'me manda um oi', cor: C.green, glifo: GLIFO_EMAIL },
 ];
-
-// ---------------------------------------------------------------------------
-// A paleta, com a origem de cada cor
-// ---------------------------------------------------------------------------
-
-const AMOSTRAS = [
-  { hex: C.rust, nome: 'RUST' },
-  { hex: C.ember, nome: 'EMBER' },
-  { hex: C.amber, nome: 'AMBER' },
-  { hex: C.cream, nome: 'CREAM' },
-  { hex: C.dodger, nome: 'DODGER' },
-  { hex: C.moss, nome: 'MOSS' },
-];
-
-function paletaSvg() {
-  const W = 1200;
-  const H = 152;
-  const larg = 176;
-  const vao = 24;
-  const total = AMOSTRAS.length * larg + (AMOSTRAS.length - 1) * vao;
-  const x0 = Math.round((W - total) / 2);
-
-  const cartoes = AMOSTRAS.map((a, i) => {
-    const x = x0 + i * (larg + vao);
-    return `  <g class="carta" style="animation-delay:${(i * 0.09).toFixed(2)}s">
-    <rect x="${x}" y="8" width="${larg}" height="88" rx="12" fill="${a.hex}"/>
-    <rect class="brilho" x="${x}" y="8" width="${larg}" height="88" rx="12" fill="#fff" opacity="0" style="animation-delay:${(i * 0.45).toFixed(2)}s"/>
-    <text x="${x}" y="118" font-family="${MONO}" font-size="13" font-weight="700" letter-spacing="2" fill="${a.hex}">${a.nome}</text>
-    <text x="${x}" y="138" font-family="${MONO}" font-size="12" fill="${C.smoke}">${a.hex.toUpperCase()}</text>
-  </g>`;
-  }).join('\n');
-
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" fill="none" role="img" aria-label="Paleta">
-<title>A paleta</title>
-<defs>
-${grao}
-  <style>
-    @keyframes subir { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes lustro { 0%,88%,100% { opacity: 0; } 93% { opacity: .28; } }
-    .carta  { animation: subir .7s cubic-bezier(.2,.8,.2,1) both; }
-    .brilho { animation: lustro 6s ease-in-out infinite; }
-    @media (prefers-reduced-motion: reduce) { .carta, .brilho { animation: none; } .carta { opacity: 1; } }
-  </style>
-</defs>
-<rect width="${W}" height="${H}" fill="${C.void}"/>
-${cartoes}
-<rect width="${W}" height="${H}" filter="url(#g)" opacity="0.05" style="mix-blend-mode:overlay"/>
-</svg>
-`;
-}
 
 // ---------------------------------------------------------------------------
 // Marquise de ferramentas
@@ -158,8 +107,8 @@ function stackSvg() {
   // instante em que a primeira sai de cena a segunda esta no lugar exato dela, e o laco nao tem
   // emenda visivel.
   const item = (t, i) =>
-    `<text x="${i * 250}" y="0" font-family="${MONO}" font-size="17" font-weight="700" letter-spacing="2.4" fill="${i % 3 === 0 ? C.ember : i % 3 === 1 ? C.cream : C.amber}" opacity="${i % 3 === 1 ? 0.9 : 0.75}">${t}</text>` +
-    `<circle cx="${i * 250 + 250 - 26}" cy="-6" r="3.5" fill="${C.rust}" opacity="0.7"/>`;
+    `<text x="${i * 250}" y="0" font-family="${MONO}" font-size="17" font-weight="700" letter-spacing="2.4" fill="${i % 3 === 0 ? C.blue : i % 3 === 1 ? C.text : C.purple}" opacity="${i % 3 === 1 ? 0.9 : 0.75}">${t}</text>` +
+    `<circle cx="${i * 250 + 250 - 26}" cy="-6" r="3.5" fill="${C.pink}" opacity="0.7"/>`;
   const copia = FERRAMENTAS.map(item).join('');
   const larguraCopia = FERRAMENTAS.length * 250;
 
@@ -180,8 +129,8 @@ ${grao}
   </style>
 </defs>
 <rect width="${W}" height="${H}" fill="${C.void}"/>
-<line x1="0" y1="0.5" x2="${W}" y2="0.5" stroke="${C.cream}" stroke-opacity="0.07"/>
-<line x1="0" y1="${H - 0.5}" x2="${W}" y2="${H - 0.5}" stroke="${C.cream}" stroke-opacity="0.07"/>
+<line x1="0" y1="0.5" x2="${W}" y2="0.5" stroke="${C.text}" stroke-opacity="0.07"/>
+<line x1="0" y1="${H - 0.5}" x2="${W}" y2="${H - 0.5}" stroke="${C.text}" stroke-opacity="0.07"/>
 <g transform="translate(0 ${H / 2 + 6})">
   <g class="fita">${copia}<g transform="translate(${larguraCopia} 0)">${copia}</g></g>
 </g>
@@ -203,8 +152,8 @@ function divisorSvg(titulo) {
 <title>${esc(titulo)}</title>
 <defs>
   <linearGradient id="l" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0" stop-color="${C.rust}"/>
-    <stop offset="1" stop-color="${C.rust}" stop-opacity="0"/>
+    <stop offset="0" stop-color="${C.pink}"/>
+    <stop offset="1" stop-color="${C.pink}" stop-opacity="0"/>
   </linearGradient>
   <style>
     @keyframes bater { 0%,100% { opacity: .35; transform: scale(1); } 50% { opacity: 1; transform: scale(1.35); } }
@@ -213,8 +162,8 @@ function divisorSvg(titulo) {
   </style>
 </defs>
 <rect width="${W}" height="${H}" fill="${C.void}"/>
-<circle class="pt" cx="12" cy="${H / 2}" r="5" fill="${C.rust}"/>
-<path d="${t.d}" transform="translate(30 ${H / 2 + 11})" fill="${C.cream}"/>
+<circle class="pt" cx="12" cy="${H / 2}" r="5" fill="${C.pink}"/>
+<path d="${t.d}" transform="translate(30 ${H / 2 + 11})" fill="${C.text}"/>
 <rect x="${Math.round(t.largura) + 50}" y="${H / 2 - 1}" width="${W - Math.round(t.largura) - 66}" height="2" fill="url(#l)"/>
 </svg>
 `;
@@ -227,12 +176,9 @@ fs.mkdirSync('../assets', { recursive: true });
 for (const l of links) {
   fs.writeFileSync(`../assets/${l.arq}`, botao(l));
 }
-fs.writeFileSync('../assets/paleta.svg', paletaSvg());
 fs.writeFileSync('../assets/stack.svg', stackSvg());
 
 const secoes = [
-  ['div-trabalho.svg', 'o trabalho'],
-  ['div-paleta.svg', 'a paleta'],
   ['div-stack.svg', 'ferramentas'],
   ['div-numeros.svg', 'números'],
   ['div-fala.svg', 'me chama'],

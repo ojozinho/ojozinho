@@ -2,13 +2,13 @@
 <title>me manda um oi</title>
 <defs>
   <linearGradient id="f" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#7BA36A" stop-opacity="0.20"/>
-    <stop offset="1" stop-color="#7BA36A" stop-opacity="0.04"/>
+    <stop offset="0" stop-color="#3fb950" stop-opacity="0.20"/>
+    <stop offset="1" stop-color="#3fb950" stop-opacity="0.04"/>
   </linearGradient>
   <linearGradient id="v" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0" stop-color="#7BA36A" stop-opacity="0"/>
-    <stop offset="0.5" stop-color="#7BA36A" stop-opacity="0.5"/>
-    <stop offset="1" stop-color="#7BA36A" stop-opacity="0"/>
+    <stop offset="0" stop-color="#3fb950" stop-opacity="0"/>
+    <stop offset="0.5" stop-color="#3fb950" stop-opacity="0.5"/>
+    <stop offset="1" stop-color="#3fb950" stop-opacity="0"/>
   </linearGradient>
   <filter id="g" x="0" y="0" width="100%" height="100%">
     <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/>
@@ -25,13 +25,13 @@
     @media (prefers-reduced-motion: reduce) { .fio, .luz, .seta { animation: none; } }
   </style>
 </defs>
-<rect x="1" y="1" width="298" height="62" rx="14" fill="url(#f)" stroke="#7BA36A" stroke-opacity="0.32"/>
-<rect x="1" y="1" width="298" height="62" rx="14" class="fio" stroke="#7BA36A" stroke-width="2"/>
+<rect x="1" y="1" width="298" height="62" rx="14" fill="url(#f)" stroke="#3fb950" stroke-opacity="0.32"/>
+<rect x="1" y="1" width="298" height="62" rx="14" class="fio" stroke="#3fb950" stroke-width="2"/>
 <g clip-path="url(#c)"><rect class="luz" x="0" y="0" width="300" height="64" fill="url(#v)"/></g>
-<g transform="translate(24 21)" fill="#7BA36A"><path d="M2.4 2h17.2A2.4 2.4 0 0 1 22 4.4v13.2a2.4 2.4 0 0 1-2.4 2.4H2.4A2.4 2.4 0 0 1 0 17.6V4.4A2.4 2.4 0 0 1 2.4 2Zm.6 2.4 8 5.5 8-5.5H3Zm16.8 1.9-7.7 5.3a2.4 2.4 0 0 1-2.7 0L2.2 6.3v11.4h17.6V6.3Z"/></g>
-<text x="62" y="29" font-family="ui-monospace,'SF Mono','Cascadia Mono','Roboto Mono',Menlo,Consolas,monospace" font-size="10.5" letter-spacing="2.6" fill="#7BA36A" opacity="0.75">CONTATO</text>
-<text x="62" y="47" font-family="ui-monospace,'SF Mono','Cascadia Mono','Roboto Mono',Menlo,Consolas,monospace" font-size="14.5" font-weight="700" fill="#F3E2C7">me manda um oi</text>
-<g class="seta" transform="translate(266 26)" stroke="#7BA36A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+<g transform="translate(24 21)" fill="#3fb950"><path d="M2.4 2h17.2A2.4 2.4 0 0 1 22 4.4v13.2a2.4 2.4 0 0 1-2.4 2.4H2.4A2.4 2.4 0 0 1 0 17.6V4.4A2.4 2.4 0 0 1 2.4 2Zm.6 2.4 8 5.5 8-5.5H3Zm16.8 1.9-7.7 5.3a2.4 2.4 0 0 1-2.7 0L2.2 6.3v11.4h17.6V6.3Z"/></g>
+<text x="62" y="29" font-family="ui-monospace,'SF Mono','Cascadia Mono','Roboto Mono',Menlo,Consolas,monospace" font-size="10.5" letter-spacing="2.6" fill="#3fb950" opacity="0.75">E-MAIL</text>
+<text x="62" y="47" font-family="ui-monospace,'SF Mono','Cascadia Mono','Roboto Mono',Menlo,Consolas,monospace" font-size="14.5" font-weight="700" fill="#e6edf3">me manda um oi</text>
+<g class="seta" transform="translate(266 26)" stroke="#3fb950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
   <path d="M0 6h11M6 1l5 5-5 5"/>
 </g>
 <rect width="300" height="64" rx="14" filter="url(#g)" opacity="0.05" style="mix-blend-mode:overlay"/>

@@ -1,41 +1,38 @@
 /**
- * A paleta, tirada da propria ilustracao.
+ * As cores do GitHub no modo escuro.
  *
- * As cores nao foram escolhidas por gosto: foram amostradas do desenho do vagao de metro, region
- * por regiao, com canvas. O laranja e o do banco, o creme e o da parede iluminada, o azul e o do
- * bone, o verde e o do grafite. As amostras cruas sao escuras demais para texto sobre fundo
- * preto, entao a saturacao e o brilho foram levantados ate cada cor passar no contraste do WCAG
- * contra o #0d1117 do GitHub no modo escuro.
- *
- * amostra crua  ->  cor de uso        onde estava no desenho
- * #8b3708           #E2571E rust      o banco laranja do vagao
- * #a77334           #FF8A3D ember     o reflexo quente no metal
- * #d4a67b           #F2A65A amber     a parede iluminada
- * #ddb682           #F3E2C7 cream     a camiseta branca sob a luz amarela
- * #2a3f59           #3B82D6 dodger    o bone do time
- * #2a3f59           #63B3F5 sky       o mesmo azul, aberto
- * #181b1d           #7BA36A moss      o grafite verde na parede do fundo
+ * Não é uma paleta inventada: são os tokens do próprio GitHub, os mesmos que a interface em volta
+ * está usando. Isso é o ponto. O perfil encosta na página sem emenda, sem aquele retângulo de
+ * outra marca colado no meio do site.
  */
 export const C = {
-  /** O mesmo preto do GitHub no modo escuro, para o SVG encostar no fundo da pagina sem emenda. */
+  /** O fundo da página no tema escuro. Tudo aqui nasce dele. */
   void: '#0d1117',
-  ink: '#010409',
-  rust: '#E2571E',
-  ember: '#FF8A3D',
-  amber: '#F2A65A',
-  cream: '#F3E2C7',
-  dodger: '#3B82D6',
-  sky: '#63B3F5',
-  moss: '#7BA36A',
-  /** O cinza de texto secundario do proprio GitHub. */
-  smoke: '#8B949E',
+  /** O fundo dos cartões e caixas do GitHub. */
+  surface: '#161b22',
+  /** A borda padrão. */
+  line: '#30363d',
+  /** O texto principal. */
+  text: '#e6edf3',
+  /** O texto secundário. */
+  smoke: '#8b949e',
+  /** O azul de link e de destaque. */
+  blue: '#58a6ff',
+  /** O roxo do Copilot e dos rótulos. */
+  purple: '#bc8cff',
+  /** O verde de sucesso. */
+  green: '#3fb950',
+  /** O verde mais aceso, o do último nível do gráfico de contribuições. */
+  lime: '#39d353',
+  /** O rosa dos rótulos. */
+  pink: '#f778ba',
 };
 
 /**
  * Pilha de monoespacadas do sistema.
  *
- * Fonte web nao carrega dentro de SVG servido pelo GitHub, entao o texto pequeno usa o que a
- * maquina de quem le ja tem. O display nao passa por aqui: ele e contorno vetorial.
+ * Fonte web não carrega dentro de SVG servido pelo GitHub, então o texto pequeno usa o que a
+ * máquina de quem lê já tem. O display não passa por aqui: ele é contorno vetorial.
  */
 export const MONO =
   "ui-monospace,'SF Mono','Cascadia Mono','Roboto Mono',Menlo,Consolas,monospace";

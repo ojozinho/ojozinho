@@ -71,17 +71,17 @@ function desenhar(u) {
     vir aqui editar lista.
   */
   const todos = [
-    { valor: cc.contributionCalendar.totalContributions + cc.restrictedContributionsCount, rotulo: 'contribuições no ano', cor: C.ember, fixo: true },
-    { valor: cc.totalCommitContributions, rotulo: 'commits', cor: C.amber, fixo: true },
-    { valor: u.repositories.totalCount, rotulo: 'repositórios', cor: C.cream },
-    { valor: cc.totalPullRequestContributions, rotulo: 'pull requests', cor: C.sky },
-    { valor: estrelas, rotulo: 'estrelas', cor: C.rust },
-    { valor: u.followers.totalCount, rotulo: 'seguidores', cor: C.moss },
+    { valor: cc.contributionCalendar.totalContributions + cc.restrictedContributionsCount, rotulo: 'contribuições no ano', cor: C.blue, fixo: true },
+    { valor: cc.totalCommitContributions, rotulo: 'commits', cor: C.purple, fixo: true },
+    { valor: u.repositories.totalCount, rotulo: 'repositórios', cor: C.text },
+    { valor: cc.totalPullRequestContributions, rotulo: 'pull requests', cor: C.green },
+    { valor: estrelas, rotulo: 'estrelas', cor: C.pink },
+    { valor: u.followers.totalCount, rotulo: 'seguidores', cor: C.lime },
   ];
   const cartoes = todos.filter((c) => c.fixo || c.valor > 0);
 
   const W = 1200;
-  const H = 176;
+  const H = 148;
   const larg = 176;
   const vao = 24;
   const total = cartoes.length * larg + (cartoes.length - 1) * vao;
@@ -91,9 +91,9 @@ function desenhar(u) {
     .map((c, i) => {
       const x = x0 + i * (larg + vao);
       return `  <g class="carta" style="animation-delay:${(i * 0.08).toFixed(2)}s">
-    <rect x="${x}" y="40" width="${larg}" height="92" rx="14" fill="${c.cor}" fill-opacity="0.10" stroke="${c.cor}" stroke-opacity="0.28"/>
-    <text x="${x + 18}" y="94" font-family="${MONO}" font-size="34" font-weight="700" fill="${c.cor}">${compacto(c.valor)}</text>
-    <text x="${x + 18}" y="116" font-family="${MONO}" font-size="11" fill="${C.smoke}">${esc(c.rotulo)}</text>
+    <rect x="${x}" y="12" width="${larg}" height="92" rx="14" fill="${c.cor}" fill-opacity="0.10" stroke="${c.cor}" stroke-opacity="0.28"/>
+    <text x="${x + 18}" y="66" font-family="${MONO}" font-size="34" font-weight="700" fill="${c.cor}">${compacto(c.valor)}</text>
+    <text x="${x + 18}" y="88" font-family="${MONO}" font-size="11" fill="${C.smoke}">${esc(c.rotulo)}</text>
   </g>`;
     })
     .join('\n');
@@ -112,7 +112,6 @@ function desenhar(u) {
   </style>
 </defs>
 <rect width="${W}" height="${H}" fill="${C.void}"/>
-<text x="${x0}" y="24" font-family="${MONO}" font-size="11" letter-spacing="3.4" fill="${C.smoke}">DIRETO DA API DO GITHUB. ATUALIZA SOZINHO A CADA SEIS HORAS.</text>
 ${blocos}
 <rect width="${W}" height="${H}" filter="url(#g)" opacity="0.05" style="mix-blend-mode:overlay"/>
 </svg>
