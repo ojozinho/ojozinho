@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./assets/hero.svg" width="100%" alt="JOZINHO — web designer, UI/UX, São Paulo">
+<img src="./assets/hero.svg" width="100%" alt="JOZINHO — desenho, construo, confiro">
 
 <br>
 
@@ -15,6 +15,12 @@
 <img src="./assets/div-stack.svg" width="100%" alt="ferramentas">
 
 <img src="./assets/stack.svg" width="100%" alt="Figma, Illustrator, Photoshop, After Effects, Blender, React, TypeScript, Tailwind, GSAP, Motion, Firebase, Vite, Framer, Webflow, InDesign">
+
+<br>
+
+<img src="./assets/div-horas.svg" width="100%" alt="a que horas">
+
+<img src="https://raw.githubusercontent.com/ojozinho/ojozinho/output/horas.svg" width="100%" alt="Commits por hora do dia, no horário de São Paulo">
 
 <br>
 

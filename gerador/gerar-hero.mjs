@@ -56,9 +56,17 @@ const nomeY = 268;
 // A linha de foco
 // ---------------------------------------------------------------------------
 
-const PALAVRAS = ['design', 'interface', 'produto', 'marca'];
-const CORPO_PALAVRA = 30;
-const VAO = 34;
+/**
+ * A frase da linha de foco.
+ *
+ * Era uma lista de disciplinas: design, interface, produto, marca. Bonita e vazia, do tipo que
+ * cabe em qualquer perfil de qualquer pessoa. Estas tres palavras sao as etapas do trabalho de
+ * verdade, na ordem em que acontecem, e o foco passando por elas conta o processo em vez de
+ * enfeitar a tela.
+ */
+const PALAVRAS = ['desenho.', 'construo.', 'confiro.'];
+const CORPO_PALAVRA = 34;
+const VAO = 40;
 
 // Cada palavra vira caminho e guarda a própria largura, que é o que os colchetes seguem.
 const medidas = PALAVRAS.map((p) => paraCaminho(p, CORPO_PALAVRA, { tracking: -0.4 }));
@@ -75,7 +83,7 @@ const palavras = medidas.map((m, i) => {
 });
 
 /** Um ciclo completo do foco. Cada palavra fica no foco por uma fatia igual. */
-const CICLO = PALAVRAS.length * 2.1;
+const CICLO = PALAVRAS.length * 2.4;
 const fatia = 100 / PALAVRAS.length;
 /** Quanto da fatia é gasto entrando e saindo do foco, em pontos percentuais do ciclo. */
 const RAMPA = fatia * 0.18;
@@ -161,7 +169,7 @@ const COLCHETE = 13;
 const canto = (dx, dy, sx, sy) =>
   `<path d="M0 ${COLCHETE}V0h${COLCHETE}" transform="translate(${dx} ${dy}) scale(${sx} ${sy})" stroke="${C.blue}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
 
-const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" fill="none" role="img" aria-label="JOZINHO — design, interface, produto, marca">
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" fill="none" role="img" aria-label="JOZINHO — desenho, construo, confiro">
 <title>JOZINHO</title>
 <defs>
 ${gradientesFita}

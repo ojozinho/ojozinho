@@ -180,6 +180,7 @@ fs.writeFileSync('../assets/stack.svg', stackSvg());
 
 const secoes = [
   ['div-stack.svg', 'ferramentas'],
+  ['div-horas.svg', 'a que horas'],
   ['div-numeros.svg', 'números'],
   ['div-fala.svg', 'me chama'],
 ];

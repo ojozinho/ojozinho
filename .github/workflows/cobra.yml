@@ -49,6 +49,14 @@ jobs:
           SAIDA: ../dist/numeros.svg
         run: node gerar-numeros.mjs
 
+      - name: Desenhar o relógio de horas
+        working-directory: gerador
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USUARIO: ${{ github.repository_owner }}
+          SAIDA_HORAS: ../dist/horas.svg
+        run: node gerar-horas.mjs
+
       - name: Desenhar a cobra
         uses: Platane/snk@v3
         id: cobra
