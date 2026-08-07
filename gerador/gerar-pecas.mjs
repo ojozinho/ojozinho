@@ -152,8 +152,8 @@ function divisorSvg(titulo) {
 <title>${esc(titulo)}</title>
 <defs>
   <linearGradient id="l" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0" stop-color="${C.pink}"/>
-    <stop offset="1" stop-color="${C.pink}" stop-opacity="0"/>
+    <stop offset="0" stop-color="${C.blue}"/>
+    <stop offset="1" stop-color="${C.blue}" stop-opacity="0"/>
   </linearGradient>
   <style>
     @keyframes bater { 0%,100% { opacity: .35; transform: scale(1); } 50% { opacity: 1; transform: scale(1.35); } }
@@ -162,7 +162,7 @@ function divisorSvg(titulo) {
   </style>
 </defs>
 <rect width="${W}" height="${H}" fill="${C.void}"/>
-<circle class="pt" cx="12" cy="${H / 2}" r="5" fill="${C.pink}"/>
+<circle class="pt" cx="12" cy="${H / 2}" r="5" fill="${C.blue}"/>
 <path d="${t.d}" transform="translate(30 ${H / 2 + 11})" fill="${C.text}"/>
 <rect x="${Math.round(t.largura) + 50}" y="${H / 2 - 1}" width="${W - Math.round(t.largura) - 66}" height="2" fill="url(#l)"/>
 </svg>

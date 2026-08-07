@@ -54,11 +54,10 @@ jobs:
         id: cobra
         with:
           github_user_name: ${{ github.repository_owner }}
-          # As cores acompanham a paleta do perfil: o fundo é o mesmo #0d1117 do GitHub no modo
-          # escuro, e os pontos vão do rust ao amber conforme o dia teve mais ou menos
-          # contribuição.
+          # As cores sao as do proprio GitHub: os pontos usam a mesma escala de verde do grafico
+          # de contribuicoes, e a cobra vai no azul de destaque.
           outputs: |
-            dist/cobra-escura.svg?palette=github-dark&color_snake=#E2571E&color_dots=#161b22,#5c2a10,#a13d15,#E2571E,#F2A65A
+            dist/cobra-escura.svg?palette=github-dark&color_snake=#58a6ff&color_dots=#161b22,#0e4429,#006d32,#26a641,#39d353
 
       - name: Publicar no galho output
         uses: crazy-max/ghaction-github-pages@v4

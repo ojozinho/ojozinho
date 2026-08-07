@@ -177,6 +177,13 @@ ${gradientesFita}
     <stop offset="1" stop-color="${C.blue}" stop-opacity="0"/>
   </linearGradient>
 
+  <linearGradient id="veu" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="${C.void}" stop-opacity="0"/>
+    <stop offset="0.42" stop-color="${C.void}" stop-opacity="0.88"/>
+    <stop offset="0.72" stop-color="${C.void}" stop-opacity="0.88"/>
+    <stop offset="1" stop-color="${C.void}" stop-opacity="0"/>
+  </linearGradient>
+
   <filter id="desfoque" x="-30%" y="-120%" width="160%" height="340%">
     <feGaussianBlur stdDeviation="30"/>
   </filter>
@@ -235,6 +242,15 @@ ${svgFitas}
 <g clip-path="url(#recorteNome)">
   <rect class="lampejo" x="0" y="0" width="460" height="${H}" fill="url(#lampejo)"/>
 </g>
+
+<!--
+  Um véu escuro só atrás da linha de foco.
+
+  As fitas passam por ali e deixam a palavra nítida competindo com um fundo aceso, o que estraga
+  exatamente o efeito que a linha existe para produzir. O véu é um degradê que nasce e morre em
+  transparente, então ele apaga a luz onde o texto está sem desenhar uma faixa visível.
+-->
+<rect x="0" y="${linhaY - 62}" width="${W}" height="104" fill="url(#veu)"/>
 
 <!-- A linha de foco: tudo borrado menos uma palavra, e os colchetes deslizando entre elas. -->
 <g>
