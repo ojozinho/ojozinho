@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import { paraCaminho } from './vetor.mjs';
 import { C, MONO } from './paleta-final.mjs';
+import { icone, LADO_ICONE } from './icones.mjs';
 
 /**
  * As pecas menores do perfil.
@@ -93,48 +94,105 @@ const links = [
 // Marquise de ferramentas
 // ---------------------------------------------------------------------------
 
-const FERRAMENTAS = [
-  'FIGMA', 'ILLUSTRATOR', 'PHOTOSHOP', 'AFTER EFFECTS', 'BLENDER',
-  'REACT', 'TYPESCRIPT', 'TAILWIND', 'GSAP', 'MOTION',
-  'FIREBASE', 'VITE', 'FRAMER', 'WEBFLOW', 'INDESIGN',
+/**
+ * Duas faixas, e não uma.
+ *
+ * Era uma fita só com quinze ferramentas rolando. O problema é de leitura, não de conteúdo: numa
+ * fita que rola, quem olha vê cinco itens no instante em que bateu o olho, e qual cinco é sorteio.
+ * Deu para abrir o perfil e ver React, TypeScript, Tailwind e GSAP em sequência, concluindo que
+ * ali não tem ferramenta de design nenhuma, quando o Figma estava no ar dois segundos antes.
+ *
+ * Separadas em duas faixas correndo em sentidos opostos, as duas metades do ofício estão sempre
+ * na tela ao mesmo tempo, com rótulo fixo dizendo qual é qual. E o contramovimento fica melhor de
+ * ver do que duas faixas indo para o mesmo lado.
+ */
+const FAIXAS = [
+  {
+    rotulo: 'DESIGN',
+    cor: C.purple,
+    sentido: -1,
+    passo: 26,
+    itens: ['FIGMA', 'ILLUSTRATOR', 'PHOTOSHOP', 'INDESIGN', 'AFTER EFFECTS', 'PREMIERE', 'BLENDER'],
+  },
+  {
+    rotulo: 'CÓDIGO',
+    cor: C.blue,
+    sentido: 1,
+    passo: 31,
+    itens: ['REACT', 'TYPESCRIPT', 'TAILWIND', 'GSAP', 'MOTION', 'FIREBASE', 'VITE', 'WEBFLOW', 'FRAMER'],
+  },
 ];
+
+const FERRAMENTAS = FAIXAS.flatMap((f) => f.itens);
 
 function stackSvg() {
   const W = 1200;
-  const H = 92;
-  const passo = 22;
-  // A fita e desenhada duas vezes, lado a lado, e desliza exatamente a largura de uma copia. No
-  // instante em que a primeira sai de cena a segunda esta no lugar exato dela, e o laco nao tem
-  // emenda visivel.
-  const item = (t, i) =>
-    `<text x="${i * 250}" y="0" font-family="${MONO}" font-size="17" font-weight="700" letter-spacing="2.4" fill="${i % 3 === 0 ? C.blue : i % 3 === 1 ? C.text : C.purple}" opacity="${i % 3 === 1 ? 0.9 : 0.75}">${t}</text>` +
-    `<circle cx="${i * 250 + 250 - 26}" cy="-6" r="3.5" fill="${C.pink}" opacity="0.7"/>`;
-  const copia = FERRAMENTAS.map(item).join('');
-  const larguraCopia = FERRAMENTAS.length * 250;
+  const H = 150;
+  const GUTTER = 156;
+  const PASSO_ITEM = 236;
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" fill="none" role="img" aria-label="Ferramentas: ${esc(FERRAMENTAS.join(', '))}">
+  const faixas = FAIXAS.map((faixa, fi) => {
+    const y = 56 + fi * 56;
+    const larguraCopia = faixa.itens.length * PASSO_ITEM;
+
+    // A fita é desenhada duas vezes, lado a lado, e desliza exatamente a largura de uma cópia. No
+    // instante em que a primeira sai de cena a segunda está no lugar exato dela, e o laço não tem
+    // emenda visível.
+    const item = (t, i) => {
+      const x = i * PASSO_ITEM;
+      // O ícone é ancorado pelo topo, e o texto pela linha de base. Alinhar os dois pede subir o
+      // ícone quase a altura dele: sem isso ele pousaria pendurado abaixo da palavra.
+      const ic = icone(t, x, -LADO_ICONE + 4) ?? '';
+      const recuo = ic ? LADO_ICONE + 12 : 0;
+      return (
+        ic +
+        `<text x="${x + recuo}" y="0" font-family="${MONO}" font-size="16" font-weight="700" letter-spacing="2.2" fill="${C.text}" opacity="0.86">${esc(t)}</text>`
+      );
+    };
+    const copia = faixa.itens.map(item).join('');
+
+    return `  <g transform="translate(0 ${y})">
+    <text x="40" y="0" font-family="${MONO}" font-size="11" font-weight="700" letter-spacing="3" fill="${faixa.cor}">${esc(faixa.rotulo)}</text>
+    <g clip-path="url(#trilho)">
+      <g class="fita f${fi}" transform="translate(${GUTTER} 0)">${copia}<g transform="translate(${larguraCopia} 0)">${copia}</g></g>
+    </g>
+  </g>`;
+  }).join('\n');
+
+  const animacoes = FAIXAS.map((faixa, fi) => {
+    const larguraCopia = faixa.itens.length * PASSO_ITEM;
+    // O sentido inverte o ponto de partida junto com o de chegada, senão a faixa que anda para a
+    // direita começaria com um vão vazio à esquerda antes do primeiro item entrar.
+    const de = faixa.sentido < 0 ? 0 : -larguraCopia;
+    const ate = faixa.sentido < 0 ? -larguraCopia : 0;
+    return `    @keyframes fita${fi} { from { transform: translateX(${de}px); } to { transform: translateX(${ate}px); } }
+    .f${fi} { animation: fita${fi} ${faixa.passo}s linear infinite; }`;
+  }).join('\n');
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" fill="none" role="img" aria-label="Ferramentas. Design: ${esc(FAIXAS[0].itens.join(', '))}. Código: ${esc(FAIXAS[1].itens.join(', '))}">
 <title>Ferramentas do dia a dia</title>
 <defs>
-  <linearGradient id="borda" x1="0" y1="0" x2="1" y2="0">
+  <!-- O degradê é ancorado no trilho, e não no quadro. Ancorado no quadro ele apagava o rótulo
+       lá em x=40 e já tinha acabado quando chegava na entrada do trilho, que é justamente onde a
+       palavra é cortada ao meio e precisa sumir suavemente. -->
+  <linearGradient id="borda" gradientUnits="userSpaceOnUse" x1="${GUTTER - 8}" y1="0" x2="${W}" y2="0">
     <stop offset="0" stop-color="${C.void}"/>
-    <stop offset="0.08" stop-color="${C.void}" stop-opacity="0"/>
-    <stop offset="0.92" stop-color="${C.void}" stop-opacity="0"/>
+    <stop offset="0.115" stop-color="${C.void}" stop-opacity="0"/>
+    <stop offset="0.9" stop-color="${C.void}" stop-opacity="0"/>
     <stop offset="1" stop-color="${C.void}"/>
   </linearGradient>
+  <clipPath id="trilho"><rect x="${GUTTER - 8}" y="-40" width="${W - GUTTER}" height="60"/></clipPath>
 ${grao}
   <style>
-    @keyframes fita { from { transform: translateX(0); } to { transform: translateX(${-larguraCopia}px); } }
-    .fita { animation: fita ${passo}s linear infinite; }
+${animacoes}
     @media (prefers-reduced-motion: reduce) { .fita { animation: none; } }
   </style>
 </defs>
 <rect width="${W}" height="${H}" fill="${C.void}"/>
 <line x1="0" y1="0.5" x2="${W}" y2="0.5" stroke="${C.text}" stroke-opacity="0.07"/>
 <line x1="0" y1="${H - 0.5}" x2="${W}" y2="${H - 0.5}" stroke="${C.text}" stroke-opacity="0.07"/>
-<g transform="translate(0 ${H / 2 + 6})">
-  <g class="fita">${copia}<g transform="translate(${larguraCopia} 0)">${copia}</g></g>
-</g>
-<rect width="${W}" height="${H}" fill="url(#borda)"/>
+${faixas}
+<rect x="${GUTTER - 8}" y="0" width="${W - GUTTER + 8}" height="${H}" fill="url(#borda)"/>
 <rect width="${W}" height="${H}" filter="url(#g)" opacity="0.05" style="mix-blend-mode:overlay"/>
 </svg>
 `;

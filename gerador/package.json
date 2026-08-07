@@ -9,7 +9,8 @@
     "provar": "node provar.mjs"
   },
   "dependencies": {
-    "opentype.js": "^1.3.4"
+    "opentype.js": "^1.3.4",
+    "simple-icons": "^16.28.0"
   },
   "devDependencies": {
     "playwright": "^1.49.0"
